@@ -36,7 +36,7 @@ def board_view(disposition: tuple, c: int):
 correct_disp = set()
 count = 0
 
-while len(correct_disp) <= SOLUTIONS:
+while len(correct_disp) < SOLUTIONS:
     count += 1
     curr_disp = disp_generator()
     if check_valid(curr_disp) and curr_disp not in correct_disp:
