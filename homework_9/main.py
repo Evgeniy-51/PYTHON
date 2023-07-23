@@ -12,14 +12,10 @@ from random import randint as rnd
 
 CSV_PATH = Path.cwd() / 'numbers.csv'
 JSON_PATH = Path.cwd() / 'result.json'
-print('init')  # для отладки
 
 
 def deco_quadratic(func):
-    print('deco_quadratic')  # для отладки
-
     def wrapper(*args):
-        print('deco_quadratic wrapper')  # для отладки
         csv_generator()
         with open(CSV_PATH) as f1:
             data = csv.reader(f1, quotechar=',', quoting=csv.QUOTE_NONNUMERIC)
@@ -32,10 +28,8 @@ def deco_quadratic(func):
 
 def deco_save_to_json(func):
     data = []
-    print('deco_save_to_json')  # для отладки
 
     def wrapper(*args):
-        print('deco_save_to_json wrapper')  # для отладки
         res = func(*args)
         data.append({'Parameters': args, 'Results': res})
         with open(JSON_PATH, 'w', encoding='utf-8') as f3:
@@ -48,7 +42,6 @@ def deco_save_to_json(func):
 @deco_quadratic
 @deco_save_to_json
 def quadratic_equation(a: int, b: int, c: int):
-    print('BASE FUNCTION')  # для отладки
     if a:
         d = b ** 2 - 4 * a * c
         if d > 0:
@@ -61,7 +54,6 @@ def quadratic_equation(a: int, b: int, c: int):
 
 
 def csv_generator():
-    print('csv_generator')  # для отладки
     # rows = rnd(100, 1000)
     rows = 3  # для отладки
     numbers = [[rnd(-50, 50) for _ in range(3)] for _ in range(rows)]
@@ -71,5 +63,4 @@ def csv_generator():
 
 
 if __name__ == '__main__':
-    print('main')  # для отладки
     quadratic_equation()
