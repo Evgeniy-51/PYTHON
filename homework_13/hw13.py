@@ -51,7 +51,7 @@ class Project:
                     user = User(int(u_id), name, int(level))
                 except ValueError:
                     raise RunTimeException('u_id and level must be of type INT')
-                except:
+                except Exception:
                     raise RunTimeException()
                 else:
                     cls.users_lst.append(user)
@@ -67,12 +67,6 @@ class Project:
                 print(f'{curr_user.name} successfully logged in!')
                 break
 
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        with open('users1.json', 'w', encoding='utf-8') as f:
-            json.dump(self.users_lst, f, indent=2, sort_keys=True)
 
     def add_user(self, u_id, name, level):
         new_user = User(u_id, name, level)
